@@ -22,7 +22,7 @@ void setup() {
     shape.vertex(RAD * r * cos(TWO_PI * i / 10.0), RAD * r * sin(TWO_PI * i / 10.0));
   }
   shape.endShape(CLOSE);
-  //colorMode(HSB, COLOURS, 100, 100);
+  colorMode(HSB, COLOURS, 100, 100);
 }
 
 void draw() {
@@ -33,7 +33,8 @@ void draw() {
   }
 }
 
-float ACC = .3;
+float ACC = .25;
+float VEL = 5;
 class Star {
   PVector pos = new PVector();
   PVector vel = new PVector();
@@ -46,7 +47,7 @@ class Star {
   Star(float x, float y) {
     pos.x = x;
     pos.y = y;
-    vel = PVector.random2D().mult(3);
+    vel = PVector.random2D().mult(VEL);
     acc.y = ACC;
   }
   
@@ -55,7 +56,8 @@ class Star {
     c = (c + cd + COLOURS) % COLOURS;
     vel.add(acc);
     pos.add(vel);
-    stroke(c);
+    color colour = color(c, 100, 100);
+    shape.setStroke(colour);
     noFill();
     pushMatrix();
     translate(pos.x, pos.y);
@@ -66,7 +68,7 @@ class Star {
       pos.x = mouseX - width / 2;
       pos.y = mouseY;
       acc.y = .3;
-      vel = PVector.random2D().mult(3);
+      vel = PVector.random2D().mult(VEL);
     }
   }
 }

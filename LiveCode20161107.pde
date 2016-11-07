@@ -4,6 +4,7 @@ PShape shape;
 int COUNT = 200;
 int COLOURS = 500;
 float RAD = 20;
+boolean video = true;
 
 void setup() {
   size(640, 360);
@@ -31,6 +32,12 @@ void draw() {
   for (Star star : stars) {
     star.draw();
   }
+  if (video) {
+    saveFrame("frame#####.png");
+    if (frameCount > 500) {
+      exit();
+    }
+  }
 }
 
 float ACC = .25;
@@ -40,7 +47,7 @@ class Star {
   PVector vel = new PVector();
   PVector acc = new PVector();
   float r = random(TWO_PI);
-  float d = random(-.02, .02);
+  float d = random(-.03, .03);
   int c = (int)random(COLOURS);
   int cd = (int)random(-5, 5);
   
@@ -67,8 +74,14 @@ class Star {
     if (pos.y > height) {
       pos.x = mouseX - width / 2;
       pos.y = mouseY;
-      acc.y = .3;
+      acc.y = ACC;
       vel = PVector.random2D().mult(VEL);
     }
+  }
+}
+
+void keyPressed() {
+  if (key == 's') {
+    saveFrame("snapshot####.png");
   }
 }

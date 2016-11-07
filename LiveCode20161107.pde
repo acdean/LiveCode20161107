@@ -3,11 +3,12 @@ ArrayList<Star> stars = new ArrayList<Star>();
 PShape shape;
 int COUNT = 2;
 int COLOURS = 500;
+float RAD = 20;
 
 void setup() {
   size(640, 360);
   for (int i = 0 ; i < COUNT ; i++) {
-    stars.add(new Star(width / 2, height / 2));
+    stars.add(new Star(width / 2, 0));
   }
   shape = createShape();
   shape.beginShape();
@@ -18,14 +19,15 @@ void setup() {
     if ((i & 1) == 0) {
       r = .35;
     }
-    shape.vertex(r * cos(TWO_PI * i / 10.0), r * sin(TWO_PI * i / 10.0));
+    shape.vertex(RAD * r * cos(TWO_PI * i / 10.0), RAD * r * sin(TWO_PI * i / 10.0));
   }
   shape.endShape(CLOSE);
-  colorMode(HSB, COLOURS, 100, 100);
+  //colorMode(HSB, COLOURS, 100, 100);
 }
 
 void draw() {
   background(0, 0, 0);
+  translate(width / 2, 0);
   for (Star star : stars) {
     star.draw();
   }
@@ -44,7 +46,7 @@ class Star {
     pos.x = x;
     pos.y = y;
     vel = PVector.random2D();
-    acc.y = -.5;
+    acc.y = .5;
   }
   
   void draw() {
@@ -55,9 +57,13 @@ class Star {
     stroke(c);
     noFill();
     pushMatrix();
-    rotate(r);
     translate(pos.x, pos.y);
+    rotate(r);
     shape(shape);
     popMatrix();
+    if (pos.y > height) {
+      pos.x = mouseX;
+      pos.y = mouseY;
+    }
   }
 }

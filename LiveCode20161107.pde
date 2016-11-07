@@ -1,6 +1,7 @@
 ArrayList<Star> stars = new ArrayList<Star>();
 
 PShape shape;
+int COUNT = 2;
 int COLOURS = 500;
 
 void setup() {
@@ -12,7 +13,7 @@ void setup() {
   shape.beginShape();
   for (int i = 0 ; i < 10 ; i++) {
     float r = 1.0;
-    if (i & 1 == 0) {
+    if ((i & 1) == 0) {
       r = .35;
     }
     shape.vertex(r * cos(TWO_PI * i / 10.0), r * sin(TWO_PI * i / 10.0));
@@ -34,7 +35,7 @@ class Star {
   PVector acc = new PVector();
   float r = random(TWO_PI);
   float d = random(-.02, .02);
-  int c = random(COLOURS);
+  int c = (int)random(COLOURS);
   int cd = (int)random(-5, 5);
   
   Star(float x, float y) {

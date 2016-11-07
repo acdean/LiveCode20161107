@@ -11,6 +11,8 @@ void setup() {
   }
   shape = createShape();
   shape.beginShape();
+  shape.noFill();
+  shape.stroke(255);
   for (int i = 0 ; i < 10 ; i++) {
     float r = 1.0;
     if ((i & 1) == 0) {
@@ -50,10 +52,11 @@ class Star {
     c = (c + cd + COLOURS) % COLOURS;
     vel.add(acc);
     pos.add(vel);
+    stroke(c);
+    noFill();
     pushMatrix();
     rotate(r);
     translate(pos.x, pos.y);
-    shape.setStroke(c);
     shape(shape);
     popMatrix();
   }

@@ -1,7 +1,7 @@
 ArrayList<Star> stars = new ArrayList<Star>();
 
 PShape shape;
-int COUNT = 2;
+int COUNT = 200;
 int COLOURS = 500;
 float RAD = 20;
 
@@ -33,6 +33,7 @@ void draw() {
   }
 }
 
+float ACC = .3;
 class Star {
   PVector pos = new PVector();
   PVector vel = new PVector();
@@ -45,8 +46,8 @@ class Star {
   Star(float x, float y) {
     pos.x = x;
     pos.y = y;
-    vel = PVector.random2D();
-    acc.y = .5;
+    vel = PVector.random2D().mult(3);
+    acc.y = ACC;
   }
   
   void draw() {
@@ -62,8 +63,10 @@ class Star {
     shape(shape);
     popMatrix();
     if (pos.y > height) {
-      pos.x = mouseX;
+      pos.x = mouseX - width / 2;
       pos.y = mouseY;
+      acc.y = .3;
+      vel = PVector.random2D().mult(3);
     }
   }
 }

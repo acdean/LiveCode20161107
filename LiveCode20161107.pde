@@ -4,7 +4,7 @@ PShape shape;
 int COUNT = 200;
 int COLOURS = 500;
 float RAD = 20;
-boolean video = true;
+boolean video = false;
 
 void setup() {
   size(640, 360);
